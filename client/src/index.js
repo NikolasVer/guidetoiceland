@@ -17,17 +17,17 @@ const client = new ApolloClient({
 });
 
 client
-  .query({
-    query: gql`
-      {
-        photos {
-          id
-        }
-      }
-    `
-  })
-  .then(console.log)
-  .catch(err => console.log(err));
+  // .query({
+  //   query: gql`
+  //     {
+  //       photos {
+  //         id
+  //       }
+  //     }
+  //   `
+  // })
+  // // .then(console.log)
+  // .catch(err => console.log(err));
 
 ReactDOM.render(
   <ApolloProvider client={client}>
