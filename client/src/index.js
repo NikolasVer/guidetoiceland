@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
+import "./styles/index.css";
+import App from "./scenes/Home/App";
 import registerServiceWorker from "./registerServiceWorker";
 
 import { ApolloProvider } from "react-apollo";
@@ -20,9 +20,8 @@ client
   .query({
     query: gql`
       {
-        customer(id: "1") {
+        photos {
           id
-          name
         }
       }
     `

@@ -62,7 +62,7 @@ const PhotosType = new GraphQLObjectType({
 
 // Root Query
 const RootQuery = new GraphQLObjectType({
-  name: "RootQueryType",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+  name: "RootQueryType",
   fields: {
     photos: {
       type: PhotosType,
