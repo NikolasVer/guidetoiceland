@@ -1,11 +1,10 @@
+import faker from 'faker';
 
 const initialPhotoTemplate = id => ({
     id,
-    link: "http://via.placeholder.com/350x150",
-    name: "Test image",
-    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Aenean porta tortor a diam maximus, ultrices fringilla dui
-            varius. Sed egestas tortor quis mi laoreet pretium. I`
+    link: "http://via.placeholder.com/350x200",
+    name: faker.finance.accountName(),
+    description: faker.company.catchPhrase()
 });
 
 /**

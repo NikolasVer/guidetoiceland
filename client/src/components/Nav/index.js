@@ -1,33 +1,45 @@
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
-import './index.scss';
+import "./index.scss";
 
 class NavButtons extends Component {
-    constructor(props) {
-        super(props);
-        this.clickHandler = this.clickHandler.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {active: 1};
+    this.clickHandler = this.clickHandler.bind(this);
+  }
 
-    clickHandler(count) {
-       this.props.loadPhotos(count);
-    }
+  clickHandler(id, count) {
+    this.props.loadPhotos(count);
+    this.setState(_ => ({active: id}));
+  }
 
-    render() {
-        return (
-            <section className="top-nav-buttons">
-                <button className="btn" onClick={() => this.clickHandler(10)}>Popular tips</button>
-                <button className="btn" onClick={() => this.clickHandler(20)}>Verified locals</button>
-                <button className="btn" onClick={() => this.clickHandler(30)}>Latest tips</button>
-                <button className="btn" onClick={() => this.clickHandler(40)}>Newest locals</button>
-            </section>
-        )
-    }
+  render() {
+    const buttons = [
+      { id: 1, value: 10, text: "Popular tips" },
+      { id: 2, value: 20, text: "Verified locals" },
+      { id: 3, value: 30, text: "Latest tips" },
+      { id: 4, value: 40, text: "Newest locals" }
+    ];
+
+    return (
+      <section className="top-nav-buttons">
+        {buttons.map(item => (
+          <button
+            className={this.state.active === item.id? "active btn" : 'btn'}
+            onClick={() => this.clickHandler(item.id, item.value)}
+          >
+            {item.text}
+          </button>
+        ))}
+      </section>
+    );
+  }
 }
 
 NavButtons.propTypes = {
-    loadPhotos: PropTypes.func.isRequired
+  loadPhotos: PropTypes.func.isRequired
 };
 
 export default NavButtons;

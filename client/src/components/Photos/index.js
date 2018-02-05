@@ -2,7 +2,10 @@ import React from "react";
 // import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import { withApollo } from "react-apollo";
-import { PropTypes } from 'prop-types';
+import { PropTypes } from "prop-types";
+
+import './index.scss';
+
 
 const photoGraphQLQuery = count => gql`
 query {
@@ -39,8 +42,6 @@ class PhotosSection extends React.Component {
           this.setState(_ => ({
             photos: res.data.photos
           }));
-        } else {
-          return "Loading";
         }
       })
       .catch(err => console.error(err));
@@ -48,18 +49,24 @@ class PhotosSection extends React.Component {
   render() {
     const { photos } = this.state;
 
-    if (!photos.length) {
-      return "Loading";
-    } else {
-      return photos.map(photo => (
-        <img src={photo.link} alt={photo.name} key={photo.id} />
-      ));
-    }
+    const getPhotoContainer = photo => {
+      return (
+        <div className="image-container" key={photo.id}>
+          <img src={photo.link} alt={photo.name} />
+          <span className="photo-signature">{photo.name}</span>
+          <span className="description">{photo.description}</span>
+        </div>
+      );
+    };
+
+    if (!photos.length) return "Loading";
+
+    return photos.map(photo => getPhotoContainer(photo));
   }
 }
 
 PhotosSection.propTypes = {
   count: PropTypes.number.isRequired
-}
+};
 
 export default withApollo(PhotosSection);

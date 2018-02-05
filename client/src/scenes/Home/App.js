@@ -22,10 +22,10 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <NavButtons loadPhotos={this.loadPhotos}/>
-
-          <h4>Fetch {this.state.count}</h4>
+          <h4>Fetch {this.state.count} items</h4>
         </header>
+
+        <NavButtons loadPhotos={this.loadPhotos}/>
 
         <section className="photos-wrapper">
           <PhotoSection count={this.state.count}/>

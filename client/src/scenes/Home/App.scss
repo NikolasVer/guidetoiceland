@@ -7,8 +7,10 @@
   }
 
   .App-header {
-    background-color: #222;
-    height: 180px;
+    display: flex;
+    align-items: center;
+    background-color: #cc6699;
+    height: 40px;
     padding: 20px;
     color: white;
   }
@@ -19,11 +21,6 @@
   flex-wrap: wrap;
   justify-content: space-around;
   margin-top: 20px;
-
-  img {
-    margin-bottom: 8px;
-  }
-
 }
 
 @keyframes App-logo-spin {
