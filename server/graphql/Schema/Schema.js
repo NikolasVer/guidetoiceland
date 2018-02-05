@@ -1,12 +1,10 @@
 import {
   GraphQLObjectType,
-  GraphQLNonNull,
   GraphQLSchema,
   GraphQLString,
   GraphQLList,
-  GraphQLInt,
   GraphQLID,
-  GraphQLBoolean
+  GraphQLInt
 } from "graphql/type";
 
 import photos from '../../db/data';
@@ -28,14 +26,16 @@ const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
     photos: {
-      type: PhotosType,
+      type: new GraphQLList(PhotosType),
       args: {
-        id: { type: GraphQLID }
+        count: { type: GraphQLInt }
       },
       resolve(root, args) {
-        return args.id
-          ? photos.find(item => item.id === args.id)
-          : photos.map(item => item);
+        // return args.id
+        //   ? photos.find(item => item.id === args.id)
+        //   : photos;
+
+        return photos(args);
       }
     }
   }
