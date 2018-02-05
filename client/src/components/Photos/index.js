@@ -1,24 +1,65 @@
 import React from "react";
-import { graphql } from "react-apollo";
+// import { graphql } from "react-apollo";
 import gql from "graphql-tag";
+import { withApollo } from "react-apollo";
+import { PropTypes } from 'prop-types';
 
-function PhotosSection({ data: { photos, loading, error } }) {
-  if (error) {
-    console.log("Error!".error);
-    return false;
+const photoGraphQLQuery = count => gql`
+query {
+  photos (count: ${count}) {
+    id
+    name
+    link
+    description
   }
-  if (loading) return "Loading...";
+}`;
 
-  return <img src={photos.link} alt={photos.name} />;
-}
+class PhotosSection extends React.Component {
+  constructor({ count, client }) {
+    super();
+    this.state = {
+      photos: []
+    };
+    this.client = client;
+  }
 
-export default graphql(gql`
-  query {
-    photos(id: "1") {
-      id
-      name
-      link
-      description
+  componentWillMount() {
+    this.fethData(this.props.count);
+  }
+
+  componentWillReceiveProps(_props) {
+    this.fethData(_props.count);
+  }
+
+  fethData(count) {
+    return this.client
+      .query({ query: photoGraphQLQuery(count) })
+      .then(res => {
+        if (res.data.photos) {
+          this.setState(_ => ({
+            photos: res.data.photos
+          }));
+        } else {
+          return "Loading";
+        }
+      })
+      .catch(err => console.error(err));
+  }
+  render() {
+    const { photos } = this.state;
+
+    if (!photos.length) {
+      return "Loading";
+    } else {
+      return photos.map(photo => (
+        <img src={photo.link} alt={photo.name} key={photo.id} />
+      ));
     }
   }
-`)(PhotosSection);
+}
+
+PhotosSection.propTypes = {
+  count: PropTypes.number.isRequired
+}
+
+export default withApollo(PhotosSection);
