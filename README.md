@@ -12,9 +12,12 @@
    - Jest + Enzyme
 
 ## Setup 
-- npm i
-- cd client/ && npm i
+ - npm i
+ - cd client/ && npm i
 
-## Run dev
-- npm run server:dev
-- cd client/ && npm start
+## Run
+ - npm run server:dev
+ - cd client/ && npm start
+
+## Test
+ - npm run test
