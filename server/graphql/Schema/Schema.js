@@ -7,12 +7,12 @@ import {
   GraphQLInt
 } from "graphql/type";
 
-import photos from '../../db/data';
+import getPhotos from '../../db/data';
 
 // Photo element GraphQL Object Type
 const PhotosType = new GraphQLObjectType({
   name: "photos",
-  description: "Placeholder Photos array",
+  description: "Photos array",
   fields: () => ({
     id: { type: GraphQLID },
     link: { type: GraphQLString },
@@ -28,14 +28,14 @@ const RootQuery = new GraphQLObjectType({
     photos: {
       type: new GraphQLList(PhotosType),
       args: {
-        count: { type: GraphQLInt }
+        count: { type: GraphQLInt },
+        id: {type: GraphQLID}
       },
       resolve(root, args) {
         // return args.id
         //   ? photos.find(item => item.id === args.id)
         //   : photos;
-
-        return photos(args);
+        return getPhotos(args);
       }
     }
   }
