@@ -1,11 +1,5 @@
 $signatureHeigth: 40px;
 
-.extra-large-view {
-  @media all and (min-width: 1500px) {
-    flex: 0 0 8.333333%;
-    max-width: 8.333333%;
-  }
-}
 
 .image-container {
   position: relative;
@@ -52,5 +46,19 @@ $signatureHeigth: 40px;
     background-color: #cc6699;
     color: white;
     font-size: 19px;
+  }
+}
+
+
+.extra-large-view {
+  @media all and (min-width: 1500px) {
+    flex: 0 0 8.333333%;
+    max-width: 8.333333%;
+  }
+
+  .photo-signature,
+  .description {
+    padding: 2px;
+    font-size: 15px;
   }
 }
