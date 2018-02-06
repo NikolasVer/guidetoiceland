@@ -4,8 +4,7 @@ import gql from "graphql-tag";
 import { withApollo } from "react-apollo";
 import { PropTypes } from "prop-types";
 
-import './index.scss';
-
+import "./index.scss";
 
 const photoGraphQLQuery = count => gql`
 query {
@@ -21,7 +20,8 @@ class PhotosSection extends React.Component {
   constructor({ count, client }) {
     super();
     this.state = {
-      photos: []
+      photos: [],
+      imageStatus: "loading"
     };
     this.client = client;
   }
@@ -32,6 +32,14 @@ class PhotosSection extends React.Component {
 
   componentWillReceiveProps(_props) {
     this.fethData(_props.count);
+  }
+
+  handleImageLoaded() {
+    this.setState({ imageStatus: "loaded" });
+  }
+
+  handleImageErrored() {
+    this.setState({ imageStatus: "failed to load" });
   }
 
   fethData(count) {
@@ -51,8 +59,13 @@ class PhotosSection extends React.Component {
 
     const getPhotoContainer = photo => {
       return (
-        <div className="image-container" key={photo.id}>
-          <img src={photo.link} alt={photo.name} />
+        <div className={this.state.imageStatus === 'loaded' ? 'show image-container' : 'hide'} key={photo.id}>
+          <img
+            src={photo.link}
+            alt={photo.name}
+            onLoad={this.handleImageLoaded.bind(this)}
+            onError={this.handleImageErrored.bind(this)}
+          />
           <span className="photo-signature">{photo.name}</span>
           <span className="description">{photo.description}</span>
         </div>

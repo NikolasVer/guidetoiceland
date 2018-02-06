@@ -11,22 +11,23 @@ class NavButtons extends Component {
   }
 
   clickHandler(id, count) {
-    this.props.loadPhotos(count);
+    this.props._changePhotoCount(count);
     this.setState(_ => ({active: id}));
   }
 
   render() {
     const buttons = [
-      { id: 1, value: 10, text: "Popular tips" },
-      { id: 2, value: 20, text: "Verified locals" },
-      { id: 3, value: 30, text: "Latest tips" },
-      { id: 4, value: 40, text: "Newest locals" }
+      { id: 1, value: 5, text: "Popular tips" },
+      { id: 2, value: 10, text: "Verified locals" },
+      { id: 3, value: 15, text: "Latest tips" },
+      { id: 4, value: 20, text: "Newest locals" }
     ];
 
     return (
       <section className="top-nav-buttons">
         {buttons.map(item => (
           <button
+            key={item.id}
             className={this.state.active === item.id? "active btn" : 'btn'}
             onClick={() => this.clickHandler(item.id, item.value)}
           >
@@ -39,7 +40,7 @@ class NavButtons extends Component {
 }
 
 NavButtons.propTypes = {
-  loadPhotos: PropTypes.func.isRequired
+  _changePhotoCount: PropTypes.func.isRequired
 };
 
 export default NavButtons;
