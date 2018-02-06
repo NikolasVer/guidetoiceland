@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Button } from 'react-bootstrap';
 
 import "./index.scss";
 
@@ -17,22 +18,22 @@ class NavButtons extends Component {
 
   render() {
     const buttons = [
-      { id: 0, value: 5, text: "Popular tips" },
-      { id: 1, value: 10, text: "Verified locals" },
-      { id: 2, value: 15, text: "Latest tips" },
-      { id: 3, value: 20, text: "Newest locals" }
+      { id: 0, value: 12, text: "Popular tips" },
+      { id: 1, value: 18, text: "Verified locals" },
+      { id: 2, value: 24, text: "Latest tips" },
+      { id: 3, value: 30, text: "Newest locals" }
     ];
 
     return (
       <section className="top-nav-buttons">
         {buttons.map(item => (
-          <button
+          <Button
             key={item.id}
             className={this.state.active === item.id? "active btn" : 'btn'}
             onClick={() => this.clickHandler(item.id, item.value)}
           >
             {item.text}
-          </button>
+          </Button>
         ))}
       </section>
     );
