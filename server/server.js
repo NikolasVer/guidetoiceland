@@ -5,7 +5,6 @@ import GraphQLSchema from "./graphql/Schema/Schema";
 import cors from "cors";
 
 const PORT = process.env.port || 8080;
-
 const app = express();
 
 app.use(cors());
@@ -16,7 +15,6 @@ app.use(
   })
 );
 
-// bodyParser is needed just for POST.
 app.use(
   "/graphql",
   bodyParser.json(),
@@ -28,7 +26,7 @@ app.get(
   graphiqlExpress({
     endpointURL: "/graphql"
   })
-); // if you want GraphiQL enabled
+);
 
 app.listen(PORT, () => {
   console.log(`Server started on ${PORT}`);

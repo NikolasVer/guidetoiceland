@@ -1,10 +1,12 @@
-import faker from 'faker';
+import faker from "faker";
 
 const initialPhotoTemplate = id => ({
-    id,
-    link: "http://via.placeholder.com/350x200",
-    name: faker.finance.accountName(),
-    description: faker.company.catchPhrase()
+  id,
+  // link: "https://picsum.photos/350/200?random?v=" + Date.now() + Math.random()
+  // link: "http://lorempixel.com/350/200",
+  link: `https://fakeimg.pl/350x200/282828/eae0d0?text=${faker.finance.amount()}&font=lobster`,
+  name: faker.finance.accountName(),
+  description: faker.company.catchPhrase()
 });
 
 /**
@@ -13,17 +15,15 @@ const initialPhotoTemplate = id => ({
  * @returns {Array} photos;
  */
 function getPhotosByCount(args) {
-
-  const count = Number(args.count);
-
-  if(!count || typeof count !== 'number') {
-    console.log('Error: count invalid');
+  if (!args.count || ~~args.count === 0) {
+    console.log("Error: count invalid");
     return;
   }
 
-  let resultArray = [];
+  const count = Number(args.count);
+  const resultArray = [];
 
-  for(let i =0; i < count; i++) {
+  for (let i = 0; i < count; i++) {
     resultArray.push(initialPhotoTemplate(i.toString()));
   }
 
