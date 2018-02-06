@@ -13,7 +13,7 @@ describe("Render tests", () => {
 
 
   it('should render 4 buttons', () => {
-    const buttons = component.find('button');
+    const buttons = component.find('.btn');
     expect(buttons).toHaveLength(4);
   });
 
@@ -27,7 +27,7 @@ describe("Render tests", () => {
 
   it('active button should have "active" class', () => {
     const activeID = component.state().active;
-    const activeBtn = component.find(`button`).get(activeID);
+    const activeBtn = component.find(`.btn`).get(activeID);
     expect(shallow(activeBtn).hasClass('active')).toEqual(true);
   });
 
