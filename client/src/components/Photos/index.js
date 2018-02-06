@@ -1,20 +1,9 @@
 import React from "react";
-// import { graphql } from "react-apollo";
-import gql from "graphql-tag";
 import { withApollo } from "react-apollo";
 import { PropTypes } from "prop-types";
 import "./index.scss";
 import { Grid, Row, Col } from "react-bootstrap";
-
-const photoGraphQLQuery = count => gql`
-query {
-  photos (count: ${count}) {
-    id
-    name
-    link
-    description
-  }
-}`;
+import { photoGraphQLQuery } from '../../graphql/query';
 
 class PhotosSection extends React.Component {
   constructor({ count, client }) {
@@ -42,21 +31,21 @@ class PhotosSection extends React.Component {
   fethData(count) {
     return this.client
       .query({ query: photoGraphQLQuery(count) })
-      .then(res => {
-        if (res.data.photos) {
-          this.setState(_ => ({
-            photos: res.data.photos
-          }));
-        }
-      })
-      .catch(err => console.error(err));
+        .then(res => {
+          if (res.data.photos) {
+            this.setState(_ => ({
+              photos: res.data.photos
+            }));
+          }
+        })
+        .catch(err => console.error(err));
   }
   render() {
     const { photos } = this.state;
 
     const getPhotoContainer = photo => {
       return (
-        <Col lg={2} md={4} sm={6} xs={12} key={photo.id}>
+        <Col lg={2} md={4} sm={6} xs={12} className="#extra-large-view" key={photo.id}>
           <div className="image-container">
             <img src={photo.link} alt={photo.name} />
             <span className="photo-signature">{photo.name}</span>
