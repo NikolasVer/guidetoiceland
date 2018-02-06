@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import config from '../../config';
 import logo from '../../images/logo.svg';
 import './App.scss';
 
@@ -9,11 +10,11 @@ import NavButtons from '../../components/Nav';
 class App extends Component {
   constructor() {
     super();
-    this.state = {count: 10};
-    this.loadPhotos = this.loadPhotos.bind(this);
+    this.state = {count: config.initialPhotoCount};
+    this._changePhotoCount = this._changePhotoCount.bind(this);
   }
 
-  loadPhotos(count) {
+  _changePhotoCount(count) {
     this.setState( _ => ({count}));
   }
 
@@ -25,7 +26,7 @@ class App extends Component {
           <h4>Fetch {this.state.count} items</h4>
         </header>
 
-        <NavButtons loadPhotos={this.loadPhotos}/>
+        <NavButtons _changePhotoCount={this._changePhotoCount}/>
 
         <section className="photos-wrapper">
           <PhotoSection count={this.state.count}/>
