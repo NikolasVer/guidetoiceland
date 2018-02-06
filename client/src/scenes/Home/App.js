@@ -35,7 +35,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h4>Fetch {count} items</h4>
+          <h4 className="title">Fetch {count} items</h4>
         </header>
         <section className="photos-wrapper">
           {showLoader ? <Loader /> : ""}
