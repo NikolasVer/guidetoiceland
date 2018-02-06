@@ -34,14 +34,6 @@ class PhotosSection extends React.Component {
     this.fethData(_props.count);
   }
 
-  handleImageLoaded() {
-    this.setState({ imageStatus: "loaded" });
-  }
-
-  handleImageErrored() {
-    this.setState({ imageStatus: "failed to load" });
-  }
-
   fethData(count) {
     return this.client
       .query({ query: photoGraphQLQuery(count) })
@@ -63,8 +55,6 @@ class PhotosSection extends React.Component {
           <img
             src={photo.link}
             alt={photo.name}
-            onLoad={this.handleImageLoaded.bind(this)}
-            onError={this.handleImageErrored.bind(this)}
           />
           <span className="photo-signature">{photo.name}</span>
           <span className="description">{photo.description}</span>
